@@ -1,0 +1,10 @@
+models:
+  Personal:
+    name: string
+    last_name: string
+    identification_number: string unique
+    code: string
+    date_of_birth: date
+    email: string
+    charge: string
+    status: string

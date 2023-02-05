@@ -1,0 +1,6 @@
+created:
+    - database/factories/PersonalFactory.php
+    - database/migrations/2023_02_05_032230_create_personals_table.php
+    - app/Models/Personal.php
+models:
+    Personal: { name: string, last_name: string, identification_number: 'string unique', code: string, date_of_birth: date, email: string, charge: string, status: string }
