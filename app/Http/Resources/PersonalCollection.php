@@ -15,7 +15,7 @@ class PersonalCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => PersonalResource::collection($this->collection)
+            PersonalResource::collection($this->collection)
         ];
     }
 }

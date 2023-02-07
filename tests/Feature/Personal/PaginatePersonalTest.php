@@ -15,21 +15,21 @@ class PaginatePersonalTest extends TestCase
     {
         $personal = Personal::factory(10)->create();
 
-        $url = urldecode(route('personal.index', ['page[size]' => 2, 'page[number]' => 3]));
+        $url = urldecode(route('personal.index', ['page' => 1, 'per_page' => 3]));
 
         $response = $this->getJson($url);
 
-        $response->assertJsonCount(2, 'data');
+        $response->assertJsonCount(3, 'data');
 
         $response->assertJsonStructure([
             'links' => ['first', 'last', 'prev', 'next']
         ]);
 
         $response->assertJsonFragment([
-            'first' =>  route('personal.index', ['page[size]' => 2, 'page[number]' => 1]),
-            'last'  =>  route('personal.index', ['page[size]' => 2, 'page[number]' => 5]),
-            'prev'  =>  route('personal.index', ['page[size]' => 2, 'page[number]' => 2]),
-            'next'  =>  route('personal.index', ['page[size]' => 2, 'page[number]' => 4])
+            'first' =>  route('personal.index', ['page' => 1]),
+            'last'  =>  route('personal.index', ['page' => 4]),
+            'prev'  =>  null,
+            'next'  =>  route('personal.index', ['page' => 2])
         ]);
     }
 }

@@ -15,21 +15,15 @@ class PersonalResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type' => 'personal',
             'id' => (string) $this->resource->id,
-            'attributes' => [
-                'name' => $this->resource->name,
-                'last_name' => $this->resource->last_name,
-                'identification_number' => $this->resource->identification_number,
-                'code' => $this->resource->code,
-                'date_of_birth' => $this->resource->date_of_birth,
-                'email' => $this->resource->email,
-                'charge' => $this->resource->charge,
-                'status' => $this->resource->status
-            ],
-            'links' => [
-                'self' => route('personal.show', [$this->resource->id])
-            ]
+            'name' => $this->resource->name,
+            'last_name' => $this->resource->last_name,
+            'identification_number' => $this->resource->identification_number,
+            'code' => $this->resource->code,
+            'date_of_birth' => $this->resource->date_of_birth,
+            'email' => $this->resource->email,
+            'charge' => $this->resource->charge,
+            'status' => $this->resource->status
         ];
     }
 }
