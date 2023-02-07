@@ -20,7 +20,7 @@ class PersonalResource extends JsonResource
             'last_name' => $this->resource->last_name,
             'identification_number' => $this->resource->identification_number,
             'code' => $this->resource->code,
-            'date_of_birth' => $this->resource->date_of_birth,
+            'date_of_birth' => $this->resource->date_of_birth->format('Y-m-d'),
             'email' => $this->resource->email,
             'charge' => $this->resource->charge,
             'status' => $this->resource->status

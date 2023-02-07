@@ -34,4 +34,24 @@ class UpdatePersonalTest extends TestCase
         $this->assertEquals('Obrero', $personal['charge']);
         $this->assertEquals('Jubilado', $personal['status']);
     }
+
+    /** @test */
+    public function can_update_personal_with_nonexistent_id()
+    {
+        $data = [
+            'name' => 'Rick',
+            'last_name' => 'Ber',
+            'identification_number' => '89563258965',
+            'code' => '00001',
+            'date_of_birth' => now(),
+            'email' => 'rber@gmail.com',
+            'charge' => 'Obrero',
+            'status' => 'Jubilado'
+        ];
+
+        $response = $this->put(route('personal.update', [-1]), $data);
+
+        $response->assertStatus(404);
+
+    }
 }

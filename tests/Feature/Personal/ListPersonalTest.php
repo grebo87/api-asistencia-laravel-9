@@ -26,7 +26,7 @@ class ListPersonalTest extends TestCase
                 'last_name' => $personal->last_name,
                 'identification_number' => $personal->identification_number,
                 'code' => $personal->code,
-                'date_of_birth' => $personal->date_of_birth,
+                'date_of_birth' => $personal->date_of_birth->format('Y-m-d'),
                 'email' => $personal->email,
                 'charge' => $personal->charge,
                 'status' => $personal->status
@@ -51,7 +51,7 @@ class ListPersonalTest extends TestCase
                     'last_name' => $personal[0]->last_name,
                     'identification_number' => $personal[0]->identification_number,
                     'code' => $personal[0]->code,
-                    'date_of_birth' => $personal[0]->date_of_birth,
+                    'date_of_birth' => $personal[0]->date_of_birth->format('Y-m-d'),
                     'email' => $personal[0]->email,
                     'charge' => $personal[0]->charge,
                     'status' => $personal[0]->status
@@ -62,7 +62,7 @@ class ListPersonalTest extends TestCase
                     'last_name' => $personal[1]->last_name,
                     'identification_number' => $personal[1]->identification_number,
                     'code' => $personal[1]->code,
-                    'date_of_birth' => $personal[1]->date_of_birth,
+                    'date_of_birth' => $personal[1]->date_of_birth->format('Y-m-d'),
                     'email' => $personal[1]->email,
                     'charge' => $personal[1]->charge,
                     'status' => $personal[1]->status
@@ -73,7 +73,7 @@ class ListPersonalTest extends TestCase
                     'last_name' => $personal[2]->last_name,
                     'identification_number' => $personal[2]->identification_number,
                     'code' => $personal[2]->code,
-                    'date_of_birth' => $personal[2]->date_of_birth,
+                    'date_of_birth' => $personal[2]->date_of_birth->format('Y-m-d'),
                     'email' => $personal[2]->email,
                     'charge' => $personal[2]->charge,
                     'status' => $personal[2]->status

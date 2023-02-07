@@ -17,7 +17,22 @@ class DeletePersonalTest extends TestCase
 
         $response = $this->delete( route('personal.destroy', [$personal->getKey()]) );
 
-        $response->assertStatus(204);
+        $response->assertStatus(200);
+
+
+        $personal = $response->getOriginalContent();
+
+        $this->assertEquals('Personal eliminado', $personal['message']);
+        $this->assertEquals(true, $personal['status']);
+
+    }
+
+    /** @test */
+    public function can_remove_personal_with_nonexistent_id()
+    {
+        $response = $this->delete( route('personal.destroy', [100]) );
+
+        $response->assertStatus(404);
 
     }
 }

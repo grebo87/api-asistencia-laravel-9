@@ -8,6 +8,7 @@ use App\Models\Personal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class PersonalController extends Controller
 {
@@ -89,23 +90,32 @@ class PersonalController extends Controller
         $validator = Validator::make($input, [
             'name' => 'required',
             'last_name' => 'required',
-            'identification_number' => 'required',
-            'code' => 'required',
+            'identification_number' => [
+                'required',
+                Rule::unique('personals')->ignore($personal->id),
+            ],
+            'code' => [
+                'required',
+                Rule::unique('personals')->ignore($personal->id),
+            ],
             'date_of_birth' => 'required',
-            'email' => 'required',
+            'email' => [
+                'required',
+                Rule::unique('personals')->ignore($personal->id),
+            ],
             'charge' => 'required',
             'status' => 'required',
         ]);
 
         if($validator->fails()){
-            return response()->json([$validator->errors(), 'status' => false], 422);
+            return response()->json(['errors' => $validator->errors()->all(), 'status' => false, 'message' => 'Error de validacion']);
         }
 
         $personal->fill($input);
         $personal->save();
 
         return Response::json([
-            'data' => $personal->toArray(), 
+            'data' => PersonalResource::make($personal), 
             'message' => 'Personal modificado',
             'status' => true
         ]);
@@ -123,12 +133,16 @@ class PersonalController extends Controller
             return response()->json(['erros' => 'Personal no encontrado', 'status' => false], 404);
         }
 
-        $personal->delete();
+        if($personal->delete()){
+            return Response::json([
+                'message' => 'Personal eliminado',
+                'status' => true
+            ]);
+        }
 
         return Response::json([
-            'data' => $personal->toArray(), 
-            'message' => 'Personal eliminado',
-            'status' => true
-        ], 204);
+            'message' => 'Personal no se elimino',
+            'status' => false
+        ]);
     }
 }
