@@ -23,7 +23,8 @@ class PersonalResource extends JsonResource
             'date_of_birth' => $this->resource->date_of_birth->format('Y-m-d'),
             'email' => $this->resource->email,
             'charge' => $this->resource->charge,
-            'status' => $this->resource->status
+            'status' => $this->resource->status,
+            'assistance' =>$this->when( $request->assistance, $this->resource->dayAssistance()),
         ];
     }
 }

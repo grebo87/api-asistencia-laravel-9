@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Personal extends Model
+class Assistance extends Model
 {
     use HasFactory;
 
@@ -23,16 +23,14 @@ class Personal extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'date_of_birth' => 'date',
+        'date' => 'date:Y-m-d',
+        'start_time' => 'datetime:Y-m-d H:i:s',
+        'time_of' => 'datetime:Y-m-d H:i:s',
+        'personal_id' => 'integer',
     ];
 
-    public function assistance()
+    public function personal()
     {
-        return $this->hasMany(Assistance::class);
-    }
-
-    public function dayAssistance()
-    {
-        return $this->hasOne(Assistance::class)->where('date', now()->toDateString())->first();
+        return $this->belongsTo(Personal::class);
     }
 }

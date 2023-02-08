@@ -1,10 +1,8 @@
 models:
-  Personal:
-    name: string
-    last_name: string
-    identification_number: string unique
-    code: string
-    date_of_birth: date
-    email: string
-    charge: string
-    status: string
+  Assistance:
+    date: date
+    start_time: timestamp
+    time_of: timestamp
+    personal_id: id id foreign:personals
+    relationships:
+     belongsTo: Personal

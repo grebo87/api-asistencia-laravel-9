@@ -1,6 +1,7 @@
 created:
-    - database/factories/PersonalFactory.php
-    - database/migrations/2023_02_05_032230_create_personals_table.php
-    - app/Models/Personal.php
+    - database/factories/AssistanceFactory.php
+    - database/migrations/2023_02_07_231450_create_assistances_table.php
+    - app/Models/Assistance.php
 models:
     Personal: { name: string, last_name: string, identification_number: 'string unique', code: string, date_of_birth: date, email: string, charge: string, status: string }
+    Assistance: { date: date, start_time: timestamp, time_of: timestamp, personal_id: 'id id foreign:personals', relationships: { belongsTo: Personal } }
