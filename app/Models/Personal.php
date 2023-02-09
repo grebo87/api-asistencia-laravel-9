@@ -35,4 +35,15 @@ class Personal extends Model
     {
         return $this->hasOne(Assistance::class)->where('date', now()->toDateString())->first();
     }
+
+    public function dayAbsence()
+    {
+        return $this->hasOne(Absence::class)->where('date', now()->toDateString())->first();
+    }
+
+    public function absence()
+    {
+        return $this->hasOne(Absence::class);
+    }
+
 }

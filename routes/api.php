@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AbsenceController;
 use App\Http\Controllers\Api\AssistanceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,4 +20,14 @@ Route::get('personal/{personal_id}/get-assistance', [AssistanceController::class
 Route::post('personal/{personal_id}/mark-start-time', [AssistanceController::class, 'markStartTime'])->name('personal.mark-start-time');
 Route::put('personal/{personal_id}/mark-time-of', [AssistanceController::class, 'markTimeOf'])->name('personal.mark-time-of');
 
+Route::get('personal/{personal_id}/get-absences', [AbsenceController::class, 'getAbsenceByPersonalId'])->name('personal.get-absences');
+Route::get('personal/{personal_id}/verify-absences', [AbsenceController::class, 'verifyAbsenceByPersonalId'])->name('personal.verify-absences');
+Route::post('personal/{personal_id}/store-absences', [AbsenceController::class, 'store'])->name('personal.store-absences');
+Route::put('personal/{personal_id}/update-absences', [AbsenceController::class, 'update'])->name('personal.update-absences');
+Route::delete('personal/{personal_id}/destroy-absences', [AbsenceController::class, 'destroy'])->name('personal.destroy-absences');
+
 Route::apiResource('personal', PersonalController::class);
+
+Route::get('create_personal_fake', function(){
+    App\Models\Personal::factory(10)->create();
+});

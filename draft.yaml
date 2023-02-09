@@ -1,8 +1,8 @@
 models:
-  Assistance:
+  Absence:
     date: date
-    start_time: timestamp
-    time_of: timestamp
-    personal_id: id id foreign:personals
+    type: string
+    observation: text
+    personal_id: id foreign:personals
     relationships:
      belongsTo: Personal

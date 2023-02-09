@@ -25,6 +25,7 @@ class PersonalResource extends JsonResource
             'charge' => $this->resource->charge,
             'status' => $this->resource->status,
             'assistance' =>$this->when( $request->assistance, $this->resource->dayAssistance()),
+            'absence' =>$this->when( $request->absence, $this->resource->dayAbsence()),
         ];
     }
 }

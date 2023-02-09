@@ -68,7 +68,7 @@ class PersonalAssistanceTest extends TestCase
             'personal_id' => $personal->id,
         ]);
 
-        $response = $this->put( route('personal.mark-time-of', [$personal->id]))->dump();
+        $response = $this->put( route('personal.mark-time-of', [$personal->id]));
 
 		$response->assertStatus(200);
 
