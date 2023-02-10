@@ -1,7 +1,8 @@
 created:
-    - database/factories/AssistanceFactory.php
-    - database/migrations/2023_02_07_231450_create_assistances_table.php
-    - app/Models/Assistance.php
+    - database/factories/AbsenceFactory.php
+    - database/migrations/2023_02_08_224434_create_absences_table.php
+    - app/Models/Absence.php
 models:
     Personal: { name: string, last_name: string, identification_number: 'string unique', code: string, date_of_birth: date, email: string, charge: string, status: string }
     Assistance: { date: date, start_time: timestamp, time_of: timestamp, personal_id: 'id id foreign:personals', relationships: { belongsTo: Personal } }
+    Absence: { date: date, type: string, observation: text, personal_id: 'id foreign:personals', relationships: { belongsTo: Personal } }
