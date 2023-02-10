@@ -3,7 +3,9 @@
 namespace Tests\Feature\Personal;
 
 use App\Models\Personal;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class PaginatePersonalTest extends TestCase
@@ -13,6 +15,10 @@ class PaginatePersonalTest extends TestCase
     /** @test */
     public function can_fetch_paginated_personal()
     {
+        $user = User::factory()->create();
+
+        Sanctum::actingAs($user);
+
         $personal = Personal::factory(10)->create();
 
         $url = urldecode(route('personal.index', ['page' => 1, 'per_page' => 3]));

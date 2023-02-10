@@ -4,16 +4,26 @@ namespace Tests\Feature\Assistance;
 
 use App\Models\Assistance;
 use App\Models\Personal;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class PersonalAssistanceTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function actingAsTest()
+    {
+        $user = User::factory()->create();
+
+        Sanctum::actingAs($user);
+    }
     
     /** @test */
     public function can_get_staff_day_assistance_with_nonexistent_id()
     {
+        $this->actingAsTest();
         $response = $this->get( route('personal.get-assistance', [100]) );
 
         $response->assertStatus(404);
@@ -22,6 +32,7 @@ class PersonalAssistanceTest extends TestCase
     /** @test */
     public function can_get_staff_day_assistance()
     {
+        $this->actingAsTest();
         $personal = Personal::factory()->create();
 
         $assistance = Assistance::factory()->create([
@@ -49,6 +60,7 @@ class PersonalAssistanceTest extends TestCase
     /** @test */
     public function can_mark_the_daily_start_time_for_staff_assistance()
     {
+        $this->actingAsTest();
         $personal = Personal::factory()->create();
 
         $response = $this->post( route('personal.mark-start-time', [$personal->id]) );
@@ -59,6 +71,7 @@ class PersonalAssistanceTest extends TestCase
     /** @test */
     public function can_mark_daily_departure_time_for_staff_assistance()
     {
+        $this->actingAsTest();
         $personal = Personal::factory()->create();
 
         $assistance = Assistance::factory()->create([

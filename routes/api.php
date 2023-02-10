@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->group( function () {
     
     Route::apiResource('personal', PersonalController::class);
 
-    Route::get('user', UserController::class);
+    Route::get('user', UserController::class)->name('user');
 
 });
 
@@ -41,12 +41,12 @@ Route::middleware('auth:sanctum')->group( function () {
 Route::get('create_personal_fake', function(){
     App\Models\Personal::factory(10)->create();
 
-    // \App\Models\User::factory()->create([
-    //     'name' => fake()->name(),
-    //     'email' => fake()->unique()->safeEmail(),
-    //     'email_verified_at' => now(),
-    //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-    //     'remember_token' => 'jewgjfknewgflne.fj',
-    // ]);
+    \App\Models\User::factory()->create([
+        'name' => fake()->name(),
+        'email' => 'grebo@grebo.com',
+        'email_verified_at' => now(),
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'remember_token' => 'jewgjfknewgflne.fj',
+    ]);
 
 });

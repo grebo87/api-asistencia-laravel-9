@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Personal;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class CreatePersonalTest extends TestCase
@@ -12,6 +14,10 @@ class CreatePersonalTest extends TestCase
     /** @test */
     public function can_create_personal()
     {
+        $user = User::factory()->create();
+
+        Sanctum::actingAs($user);
+
         $data = [
             'name' => 'Rick',
             'last_name' => 'Ber',

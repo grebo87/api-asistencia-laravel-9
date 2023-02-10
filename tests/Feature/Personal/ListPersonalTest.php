@@ -3,7 +3,9 @@
 namespace Tests\Feature\Personal;
 
 use App\Models\Personal;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class ListPersonalTest extends TestCase
@@ -13,6 +15,10 @@ class ListPersonalTest extends TestCase
     /** @test */
     public function can_fetch_single_personal()
     {
+        $user = User::factory()->create();
+
+        Sanctum::actingAs($user);
+
         $this->withExceptionHandling();
 
         $personal = Personal::factory()->create();
@@ -37,6 +43,10 @@ class ListPersonalTest extends TestCase
     /** @test */
     public function can_fetch_all_personal()
     {
+        $user = User::factory()->create();
+
+        Sanctum::actingAs($user);
+        
         $personal = Personal::factory(3)->create();
 
         $response = $this->getJson(route('personal.index'));
